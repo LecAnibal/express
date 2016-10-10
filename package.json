@@ -1,0 +1,9 @@
+{
+  "name": "express-examples",
+  "version": "0.0.1",
+  "description": "express ",
+  "author": "Anibal SM",
+  "devDependencies": {
+	"express":"4.14.0"
+  }
+}
