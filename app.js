@@ -1,5 +1,10 @@
 var express = require('express');
+var bodyParser = require('body-parser')
+
 var app = express();
+
+app.use(bodyParser.raw({ type: 'application/*+xml' }));
+ 
 
 app.get('/', function (req, res) {
   res.send('express online!!!');
@@ -16,6 +21,13 @@ app.get('/query', function (req, res) {
   res.send("User : "+user+ ", Age : "+age);
 });
 
-app.listen(8080, function () {
-  console.log('express listening on port 8080!');
+app.post('/test-page', function (req, res) {
+  var body = req.body;
+  console.log(body);
+  res.send( {"status":"success"});
+});
+
+
+app.listen(9293, function () {
+  console.log('express listening on port 9293!');
 });
