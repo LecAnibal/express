@@ -2,45 +2,69 @@
 <html>
 <head>
 <script>
- 
-
 let url = 'http://localhost:9293/test'
-var jsonObject =null;
- 
+var objectJson= null;
 
- 
-var text = '{"displayName": "futbol","permalink": "url","isVisited": true ,"links": [{	"displayName": "nacional",	"permalink": "url",	"isVisited": true,	"links": [{	"displayName": "LigaMX",	"permalink": "url",	"isVisited": false,	"links": []},{	"displayName": "CopaMX", "permalink": "url",	"isVisited": false,	"links": []}]}, {	"displayName": "internacional",	"permalink": "url",	"isVisited": false,	"links": []}]}';
-
-function getBreadcom( obj, cadena){
+function getBreadcom(obj, visited){
   if(obj.isVisited){
-   cadena = cadena +' -> '+ obj.displayName;
+   visited.push(obj);
   }
   if (obj.links.length>0){
     for (var oo in obj.links) {
-     return getBreadcom(obj.links[oo], cadena);
+      getBreadcom(obj.links[oo], visited);
     }
   }
-  return cadena;
+  return visited;
 }
 
-function getBreadcomFuature( obj, cadena){
-  alert(obj.displayName)
+function getBreadcomFuture( obj, future){
   if(!obj.isVisited){
-   return obj.displayName;
+   future.push(obj);
   }
-  if (obj.links.length>0){
+  if (obj.links.length > 0){
     for (var oo in obj.links) {
-     cadena = cadena +' - '+ getBreadcomFuature(obj.links[oo],cadena);}
-    }
+      getBreadcomFuture(obj.links[oo],future);
+   }
   }
-  return cadena;
+  
+  return future;
 }
+ 
 
- obj = JSON.parse(text);
-var text = '';
-document.getElementById("demo").innerHTML = ""+getBreadcom(obj,text) +"  ||||  " +getBreadcomFuature(obj,text) ;
+ fetch(url)
+.then(res => res.json())
+.then((out) => {
+  objectJson =  out;
+  var text = '';
+  var visited =[];
+  var future = []; 
+
+// listas de datos 
+visited = getBreadcom(objectJson,visited);
+future  = getBreadcomFuture(visited[visited.length - 1],future);
+
+
+//construccion de URLS 
+var vistedURL='';
+ for (var test in visited){
+    vistedURL = vistedURL+"  <li>  <a href='"+visited[test].url+"''>"+ visited[test].displayName +"</a> </li>"
+ }
+
+ var futureURL='';
+ for (var test in  future){
+    futureURL =futureURL+"  <li>    <a href='"+future[test].url+"''>" +future[test].displayName +"</a></li> "
+ }
+
+//replace in the html  
+  document.getElementById("demo").innerHTML = vistedURL ;
+  document.getElementById("demo2").innerHTML = futureURL ;
+})
+.catch(err => console.error(err));
 
 </script>
+
+
+
 
 
 </head>
@@ -48,9 +72,9 @@ document.getElementById("demo").innerHTML = ""+getBreadcom(obj,text) +"  ||||  "
 
 <h2>Convert a string into a date object.</h2>
 
-<p id="demo"></p>
+<ul id="demo"></ul>
 
-
+<ul id="demo2"></ul>
 
 </body>
 </html>

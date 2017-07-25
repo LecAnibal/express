@@ -40,8 +40,8 @@ app.post('/test-page', function (req, res) {
 app.get('/test', function (req, res) {
  res.header('Access-Control-Allow-Origin','*');
   res.send(
- {"displayName": "futbol","permalink": "url","isVisited": "true","links": [{  "displayName": "nacional",  "permalink": "url", "isVisited": "true",  "links": []}, { "displayName": "internacional", "permalink": "url", "isVisited": "false", "links": []}]}
-    );
+{ "displayName": "futbol",  "permalink": "url", "isVisited": true,  "links": [{   "displayName": "nacional",    "permalink": "url",   "isVisited": true,    "links": [{     "displayName": "LIGAMX",      "permalink": "url",     "isVisited": true,     "links": [{       "displayName": "calendario",        "permalink": "url",       "isVisited": false,       "links": []     }, {        "displayName": "estadisticas",        "permalink": "url",       "isVisited": false,       "links": []     }, {        "displayName": "cocientes",       "permalink": "url",       "isVisited": false,       "links": []     }, {        "displayName": "tabla general",       "permalink": "url",       "isVisited": false,       "links": []     }]    }, {      "displayName": "COPAMX",      "permalink": "url",     "isVisited": false,     "links": []   }]  }, {    "displayName": "internacional",   "permalink": "url",   "isVisited": false,   "links": [] }]}
+ );
 
 
 });
