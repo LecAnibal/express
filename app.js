@@ -26,6 +26,10 @@ app.post('/test-page', function (req, res) {
   console.log(request.body);      // your JSON
    response.send(request.body);    // echo the result back
 });
+
+
+
+
 */
 app.post('/test-page', function (req, res) {
   var body = req.body;
@@ -33,6 +37,14 @@ app.post('/test-page', function (req, res) {
   res.send( {"status":"success"});
 });
 
+app.get('/test', function (req, res) {
+ res.header('Access-Control-Allow-Origin','*');
+  res.send(
+ {"displayName": "futbol","permalink": "url","isVisited": "true","links": [{  "displayName": "nacional",  "permalink": "url", "isVisited": "true",  "links": []}, { "displayName": "internacional", "permalink": "url", "isVisited": "false", "links": []}]}
+    );
+
+
+});
 
 app.listen(9293, function () {
   console.log('express listening on port 9293!');

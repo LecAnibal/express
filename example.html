@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+ 
+
+let url = 'http://localhost:9293/test'
+var jsonObject =null;
+ 
+
+ 
+var text = '{"displayName": "futbol","permalink": "url","isVisited": true ,"links": [{	"displayName": "nacional",	"permalink": "url",	"isVisited": true,	"links": [{	"displayName": "LigaMX",	"permalink": "url",	"isVisited": false,	"links": []},{	"displayName": "CopaMX", "permalink": "url",	"isVisited": false,	"links": []}]}, {	"displayName": "internacional",	"permalink": "url",	"isVisited": false,	"links": []}]}';
+
+function getBreadcom( obj, cadena){
+  if(obj.isVisited){
+   cadena = cadena +' -> '+ obj.displayName;
+  }
+  if (obj.links.length>0){
+    for (var oo in obj.links) {
+     return getBreadcom(obj.links[oo], cadena);
+    }
+  }
+  return cadena;
+}
+
+function getBreadcomFuature( obj, cadena){
+  alert(obj.displayName)
+  if(!obj.isVisited){
+   return obj.displayName;
+  }
+  if (obj.links.length>0){
+    for (var oo in obj.links) {
+     cadena = cadena +' - '+ getBreadcomFuature(obj.links[oo],cadena);}
+    }
+  }
+  return cadena;
+}
+
+ obj = JSON.parse(text);
+var text = '';
+document.getElementById("demo").innerHTML = ""+getBreadcom(obj,text) +"  ||||  " +getBreadcomFuature(obj,text) ;
+
+</script>
+
+
+</head>
+<body>
+
+<h2>Convert a string into a date object.</h2>
+
+<p id="demo"></p>
+
+
+
+</body>
+</html>
