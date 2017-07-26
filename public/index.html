@@ -32,7 +32,7 @@ function getBreadcomFuture( obj, future){
 }
  
 
- fetch(url)
+fetch(url)
 .then(res => res.json())
 .then((out) => {
   objectJson = out;
@@ -40,21 +40,22 @@ function getBreadcomFuture( obj, future){
   var visited =[];
   var future = []; 
 
-// listas de datos 
-visited = getBreadcom(objectJson,visited);
-future  = getBreadcomFuture(visited[visited.length - 1],future);
+  // listas de datos 
+  visited = getBreadcom(objectJson,visited);
+  future  = getBreadcomFuture(visited[visited.length - 1],future);
 
 
-//construccion de URLS 
-var vistedURL='';
- for (var test in visited){
-    vistedURL = vistedURL+"  <li>  <a href='"+visited[test].url+"''>"+ visited[test].displayName +"</a> </li>"
- }
+  //construccion de URLS 
+  var vistedURL='';
+  for (var test in visited){
+      console.log (visited[test]);
+    vistedURL = vistedURL+"  <li>  <a href='"+ visited[test].permalink +"'>"+ visited[test].displayName +"</a> </li>"
+  }
 
- var futureURL='';
- for (var test in  future){
-    futureURL =futureURL+"  <li>    <a href='"+future[test].url+"''>" +future[test].displayName +"</a></li> "
- }
+  var futureURL='';
+  for (var test in  future){
+    futureURL =futureURL+"  <li>    <a href='"+ future[test].permalink +"'>" +future[test].displayName +"</a></li> "
+  }
 
 //replace in the html  
   document.getElementById("demo").innerHTML = vistedURL ;
@@ -65,7 +66,7 @@ var vistedURL='';
 </script>
   <meta charset="UTF-8">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="css/prototype.css">
+  <link rel="stylesheet" type="text/css" href="../css/prototype.css">
 
 </head>
 <body>
