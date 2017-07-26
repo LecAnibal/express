@@ -19,12 +19,9 @@ function getBreadcom(obj, visited){
 }
 
 function getBreadcomFuture( obj, future){
-  if(!obj.isVisited){
-   future.push(obj);
-  }
   if (obj.links.length > 0){
     for (var oo in obj.links) {
-      getBreadcomFuture(obj.links[oo],future);
+        future.push(obj.links[oo]);
    }
   }
   
@@ -66,7 +63,7 @@ fetch(url)
 </script>
   <meta charset="UTF-8">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="../css/prototype.css">
+  <link rel="stylesheet" type="text/css" href="prototype.css">
 
 </head>
 <body>

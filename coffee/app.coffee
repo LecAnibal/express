@@ -3,22 +3,75 @@ bodyParser = require('body-parser')
 path = require('path')
 app = express()
 
+jsonInit =
+  'displayName': 'futbol'
+  'permalink': 'url'
+  'isVisited': true
+  'links': [
+    {
+      'displayName': 'nacional'
+      'permalink': 'url'
+      'isVisited': false
+      'links': [
+        {
+          'displayName': 'Liga MX'
+          'permalink': 'url'
+          'isVisited': false
+          'links': []
+        }
+        {
+          'displayName': 'Ascenso MX'
+          'permalink': 'url'
+          'isVisited': false
+          'links': []
+        }
+        {
+          'displayName': 'Copa MX'
+          'permalink': 'url'
+          'isVisited': false
+          'links': []
+        }
+        {
+          'displayName': 'Selección Mexicana'
+          'permalink': 'url'
+          'isVisited': false
+          'links': []
+        }
+      ]
+    }
+    {
+      'displayName': 'extranjero'
+      'permalink': 'url'
+      'isVisited': false
+      'links': []
+    }
+    {
+      'displayName': 'internacional'
+      'permalink': 'url'
+      'isVisited': false
+      'links': []
+    }
+  ]
+
 #app.use bodyParser.raw(type: 'html')
 #app.use(bodyParser.json());
 
-app.get '/', (req, res) ->
-  res.sendFile path.join __dirname + '/../public/'+'/index.html'
-  return
+app.use(express.static(path.join __dirname + '/../public/'));
+app.use(express.static(path.join __dirname + '/../css/'));
 
-app.get '/css/prototype.css', (req, res) ->
-  res.sendFile path.join __dirname + '/../css/'+'/prototype.css'
-  return
+#app.get '/', (req, res) ->
+# res.sendFile path.join __dirname + '/../public/'+'/index.html'
+# return
+
+#app.get '/ ', (req, res) ->
+#  res.send 'welcome '
+#  return
 
 
 app.get '/profile/:user', (req, res) ->
   res.send 'welcome ' + req.params.user
   return
-  
+
 app.get '/query', (req, res) ->
   user = req.query.user
   age = req.query.age
@@ -39,55 +92,7 @@ app.post '/test-page', (req, res) ->
   return
 app.get '/test', (req, res) ->
   res.header 'Access-Control-Allow-Origin', '*'
-  res.send
-    'displayName': 'futbol'
-    'permalink': 'url'
-    'isVisited': true
-    'links': [
-      {
-        'displayName': 'nacional'
-        'permalink': 'url'
-        'isVisited': true
-        'links': [
-          {
-            'displayName': 'Liga MX'
-            'permalink': 'url'
-            'isVisited': false
-            'links': []
-          }
-          {
-            'displayName': 'Ascenso MX'
-            'permalink': 'url'
-            'isVisited': false
-            'links': []
-          }
-          {
-            'displayName': 'Copa MX'
-            'permalink': 'url'
-            'isVisited': false
-            'links': []
-          }
-          {
-            'displayName': 'Selección Mexicana'
-            'permalink': 'url'
-            'isVisited': false
-            'links': []
-          }
-        ]
-      }
-      {
-        'displayName': 'extranjero'
-        'permalink': 'url'
-        'isVisited': false
-        'links': []
-      }
-      {
-        'displayName': 'internacional'
-        'permalink': 'url'
-        'isVisited': false
-        'links': []
-      }
-    ]
+  res.send jsonInit
   return
 
 app.listen 9293, ->
