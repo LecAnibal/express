@@ -7,7 +7,7 @@ let url = 'http://localhost:9293/test'
 var objectJson= null;
 
 function getBreadcom(obj, visited){
-  if(obj.isVisited){
+  if(obj.isVisited && obj.links.length > 0){
    visited.push(obj);
   }
   if (obj.links.length>0){
@@ -26,6 +26,14 @@ function getBreadcomFuture( obj, future){
   }
   
   return future;
+}
+
+function getClassFutureItem(item){
+    var classItem='item-disable';
+    if (item.isVisited === true ) {
+        classItem='item-enable';
+    }
+    return classItem;
 }
  
 
@@ -51,7 +59,7 @@ fetch(url)
 
   var futureURL='';
   for (var test in  future){
-    futureURL =futureURL+"  <li>    <a href='"+ future[test].permalink +"'>" +future[test].displayName +"</a></li> "
+    futureURL =futureURL+"  <li>    <a href='"+ future[test].permalink +"' class='"+getClassFutureItem(future[test])+"' >" +future[test].displayName +"</a></li> "
   }
 
 //replace in the html  

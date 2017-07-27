@@ -11,7 +11,7 @@ jsonInit =
     {
       'displayName': 'nacional'
       'permalink': 'url'
-      'isVisited': false
+      'isVisited': true
       'links': [
         {
           'displayName': 'Liga MX'
@@ -28,7 +28,7 @@ jsonInit =
         {
           'displayName': 'Copa MX'
           'permalink': 'url'
-          'isVisited': false
+          'isVisited': true
           'links': []
         }
         {
@@ -67,7 +67,7 @@ app.use(express.static(path.join __dirname + '/../css/'));
 #  res.send 'welcome '
 #  return
 
-
+###
 app.get '/profile/:user', (req, res) ->
   res.send 'welcome ' + req.params.user
   return
@@ -78,7 +78,7 @@ app.get '/query', (req, res) ->
   res.send 'User : ' + user + ', Age : ' + age
   return
 
-###$ curl -d '{"MyKey":"My Value"}' -H "Content-Type: application/json" http://127.0.0.1:9293/test-page
+ $ curl -d '{"MyKey":"My Value"}' -H "Content-Type: application/json" http://127.0.0.1:9293/test-page
 app.post('/test-page', function (req, res) {
   console.log(request.body);      // your JSON
    response.send(request.body);    // echo the result back
@@ -90,6 +90,8 @@ app.post '/test-page', (req, res) ->
   console.log body
   res.send 'status': 'success'
   return
+
+
 app.get '/test', (req, res) ->
   res.header 'Access-Control-Allow-Origin', '*'
   res.send jsonInit
