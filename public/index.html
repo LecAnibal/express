@@ -3,7 +3,7 @@
 <html>
 <head>
 <script>
-let url = 'http://localhost:9293/test'
+let url = 'http://5b15b1ba.ngrok.io/test'
 var objectJson= null;
 
 function getBreadcom(obj, visited){
@@ -54,12 +54,12 @@ fetch(url)
   var vistedURL='';
   for (var test in visited){
       console.log (visited[test]);
-    vistedURL = vistedURL+"  <li>  <a href='http://localhost:9293/setActive?id="+ visited[test].id +"' >"+ visited[test].displayName +"</a> </li>"
+    vistedURL = vistedURL+"  <li>  <a href='http://5b15b1ba.ngrok.io/setActive?id="+ visited[test].id +"' >"+ visited[test].displayName +"</a> </li>"
   }
 
   var futureURL='';
   for (var test in  future){
-    futureURL =futureURL+"  <li>    <a href='http://localhost:9293/setActive?id="+ future[test].id +"' class='"+getClassFutureItem(future[test])+"' >" +future[test].displayName +"</a></li> "
+    futureURL =futureURL+"  <li>    <a href='http://5b15b1ba.ngrok.io/setActive?id="+ future[test].id +"' class='"+getClassFutureItem(future[test])+"' >" +future[test].displayName +"</a></li> "
   }
 
 //replace in the html  
@@ -70,6 +70,7 @@ fetch(url)
 
 </script>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="prototype.css">
 
